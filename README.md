@@ -30,6 +30,8 @@ termcolor==1.1.0
 
 colorama==0.3.9
 
+And ofcourse an SS7/Sigtran access :)
+
 # Usage
 
 Example: ./GTScan.py -G 201500000000,201500000002 -g 965123456780 -c 1 -C 2 -p 2905 -P 2906 -l 192.168.56.1 -r 192.168.56.102
