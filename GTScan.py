@@ -62,12 +62,9 @@ def initM3UA():
 	m3ua_traffic_mode = {'Loadshare':2,'Broadcast': 3 ,'Override': 1 } #4Bytes
 	traffic_mode_param_len = 8 #2Bytes
 
-	##M3UA Routing Context Parameters
-	m3ua_rc = 100	#4Bytes
-	rc_param_len = 8
 
 	##M3UA Protocol Data Parameters
-	protocol_data_param_len = 52-3
+	protocol_data_param_len = 49
 	
 	opc = client_pc #4Bytes
 	dpc = peer_pc #4Bytes
@@ -87,11 +84,10 @@ def initM3UA():
 		
 		m3ua_recv = unpack('!BBBBiHHi',reply_1)
 
-		
+		#Received ASPUP_ACK
 		if m3ua_recv[3] == 4:
-			m3ua_header_aspc = pack('!BBBBiHHiHHi',m3ua_version,m3ua_reserved,m3ua_msg_class['ASPTrafficMaint'],m3ua_msg_type['ASPC'], 
-								calcsize('BBBBiHHiHHi'),m3ua_param_tags['TrafficMode'],traffic_mode_param_len, m3ua_traffic_mode['Loadshare'], 
-								m3ua_param_tags['RoutingContext'], rc_param_len, m3ua_rc)
+			m3ua_header_aspc = pack('!BBBBi',m3ua_version,m3ua_reserved,m3ua_msg_class['ASPTrafficMaint'],m3ua_msg_type['ASPC'], 
+								calcsize('BBBBi'))
 			sk.sendall(m3ua_header_aspc)
 		else:
 			print('\033[31m[-]\033[0m M3UA ASP is Down..Probably not a Sigtran Node')
@@ -107,8 +103,8 @@ def initM3UA():
 		msg_length = 69
 		
 		#return m3ua header set to send data protocol class to be used by other stack layers
-		m3ua_header_data = pack('!BBBBiHHiHHiiBBBB',m3ua_version,m3ua_reserved, m3ua_msg_class['TransferMessages'], m3ua_msg_type['Payload'],
-							msg_length, m3ua_param_tags['RoutingContext'],rc_param_len,m3ua_rc,m3ua_param_tags['ProtocolData'],protocol_data_param_len,
+		m3ua_header_data = pack('!BBBBiHHiiBBBB',m3ua_version,m3ua_reserved, m3ua_msg_class['TransferMessages'], m3ua_msg_type['Payload'],
+							msg_length,m3ua_param_tags['ProtocolData'],protocol_data_param_len,
 							opc,dpc,SI,NI,sls,mp)
 		
 
