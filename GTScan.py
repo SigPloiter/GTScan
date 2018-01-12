@@ -126,7 +126,7 @@ def initSCCP(source_GT, destination_GT, destination_ssn):
 	####Address Indicator
 	#Address indicator is 1 byte in length its value determined based on the bits that are included\
 	#in our case a value of 18(0x12) indicated that routing based on GT, GT format is 0100, SSN is included, no PC is included
-	called_addr_length = 11	#1Byte
+	called_addr_length = (5+dGT_len)	#1Byte
 	called_addr_indicator = b'\x12' #0x12 in hex, 1Byte
 	called_ssn = destination_ssn #1Byte
 	
@@ -138,7 +138,7 @@ def initSCCP(source_GT, destination_GT, destination_ssn):
 	called_GT = destination_GT #6-8 Bytes
 	
 	###Calling Party Address
-	calling_addr_length = 11	#1Byte
+	calling_addr_length = (5+sGT_len)	#1Byte
 	calling_addr_indicator = b'\x12' #0x12 in hex, 1Byte
 	calling_ssn = source_ssn #1Byte
 	
@@ -193,6 +193,8 @@ if __name__=='__main__':
 
 	global client_pc
 	global peer_pc
+	global sGT_len
+	global dGT_len
 
 	init(strip=not sys.stdout.isatty())
 	banner = "GTScan"
@@ -268,6 +270,7 @@ if __name__=='__main__':
 			10:'AuC'}
 	
 	source_GT = unhexlify(''.join([sGT[x:x+2][::-1] for x in range(0, len(sGT), 2) ]))
+	sGT_len = len(source_GT)
 	
 	
 	#Initializing SCTP
@@ -286,7 +289,7 @@ if __name__=='__main__':
 
 		if "," in dGT:
 			dGT = dGT.split(',')
-			
+			dGT_len = len(unhexlify(''.join([ dGT[0][x:x+2][::-1] for x in range(0, len(dGT[0]), 2) ])))
 			for gt in dGT:
 				destination_GT = unhexlify(''.join([ gt[x:x+2][::-1] for x in range(0, len(gt), 2) ]))
 
@@ -306,9 +309,10 @@ if __name__=='__main__':
 
 		elif "-" in dGT:
 			dGT = dGT.split('-')
+			dGT_len = len(unhexlify(''.join([ dGT[0][x:x+2][::-1] for x in range(0, len(dGT[0]), 2) ])))
 			dGT1 = int(dGT[0])
 			dGT2 = int(dGT[1])
-			print (dGT1, dGT2)
+			
 			for gt in range(dGT1, dGT2+1):
 				destination_GT = unhexlify(''.join([ str(gt)[x:x+2][::-1] for x in range(0, len(str(gt)), 2) ]))
 
@@ -324,6 +328,7 @@ if __name__=='__main__':
 						print('\033[32m[+] {} Detected on GT:+{} ,SSN:{}\033[0m '.format(destination_ssn[ssn], str(gt),ssn))
 						detected[ssn] = str(gt)
 		else:
+			dGT_len = len(unhexlify(''.join([ dGT[x:x+2][::-1] for x in range(0, len(dGT), 2) ])))
 			destination_GT = unhexlify(''.join([ dGT[x:x+2][::-1] for x in range(0, len(dGT), 2) ]))
 			for ssn in destination_ssn:
 					sccp_header = initSCCP(source_GT, destination_GT, ssn)
