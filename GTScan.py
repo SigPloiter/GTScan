@@ -98,16 +98,12 @@ def initM3UA():
 	else:
 		print("[+] M3UA Stack Initialized...\n")
 		reply_2 = sk.recv(4096)
-		m3ua_reply = unpack('!BBBBiHHiHHi',reply_2)
-	
 		msg_length = 69
 		
 		#return m3ua header set to send data protocol class to be used by other stack layers
 		m3ua_header_data = pack('!BBBBiHHiiBBBB',m3ua_version,m3ua_reserved, m3ua_msg_class['TransferMessages'], m3ua_msg_type['Payload'],
 							msg_length,m3ua_param_tags['ProtocolData'],protocol_data_param_len,
 							opc,dpc,SI,NI,sls,mp)
-		
-
 	
 		return m3ua_header_data
 		
