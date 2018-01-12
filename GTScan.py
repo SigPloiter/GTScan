@@ -269,8 +269,9 @@ if __name__=='__main__':
 			9:'EIR',
 			10:'AuC'}
 	
-	source_GT = unhexlify(''.join([sGT[x:x+2][::-1] for x in range(0, len(sGT), 2) ]))
-	sGT_len = len(source_GT)
+	if len(sGT)%2==0:
+		source_GT = unhexlify(''.join([sGT[x:x+2][::-1] for x in range(0, len(sGT), 2) ]))
+		sGT_len = len(source_GT)
 	
 	
 	#Initializing SCTP
@@ -289,7 +290,10 @@ if __name__=='__main__':
 
 		if "," in dGT:
 			dGT = dGT.split(',')
-			dGT_len = len(unhexlify(''.join([ dGT[0][x:x+2][::-1] for x in range(0, len(dGT[0]), 2) ])))
+			
+			if len(dGT[0])%2==0:
+				dGT_len = len(unhexlify(''.join([ dGT[0][x:x+2][::-1] for x in range(0, len(dGT[0]), 2) ])))
+				
 			for gt in dGT:
 				destination_GT = unhexlify(''.join([ gt[x:x+2][::-1] for x in range(0, len(gt), 2) ]))
 
@@ -309,7 +313,10 @@ if __name__=='__main__':
 
 		elif "-" in dGT:
 			dGT = dGT.split('-')
-			dGT_len = len(unhexlify(''.join([ dGT[0][x:x+2][::-1] for x in range(0, len(dGT[0]), 2) ])))
+			
+			if len(dGT[0]) % 2 == 0:
+				dGT_len = len(unhexlify(''.join([ dGT[0][x:x+2][::-1] for x in range(0, len(dGT[0]), 2) ])))
+				
 			dGT1 = int(dGT[0])
 			dGT2 = int(dGT[1])
 			
@@ -328,8 +335,10 @@ if __name__=='__main__':
 						print('\033[32m[+] {} Detected on GT:+{} ,SSN:{}\033[0m '.format(destination_ssn[ssn], str(gt),ssn))
 						detected[ssn] = str(gt)
 		else:
-			dGT_len = len(unhexlify(''.join([ dGT[x:x+2][::-1] for x in range(0, len(dGT), 2) ])))
-			destination_GT = unhexlify(''.join([ dGT[x:x+2][::-1] for x in range(0, len(dGT), 2) ]))
+			if len(dGT) % 2 == 0:
+				dGT_len = len(unhexlify(''.join([ dGT[x:x+2][::-1] for x in range(0, len(dGT), 2) ])))
+				destination_GT = unhexlify(''.join([ dGT[x:x+2][::-1] for x in range(0, len(dGT), 2) ]))
+
 			for ssn in destination_ssn:
 					sccp_header = initSCCP(source_GT, destination_GT, ssn)
 					tcap_header=initTCAP()
