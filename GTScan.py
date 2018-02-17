@@ -267,7 +267,8 @@ if __name__=='__main__':
 			7:'VLR', 
 			8:'MSC',
 			9:'EIR',
-			10:'AuC'}
+			10:'AuC',
+			149:'SGSN'}
 	
 	if len(sGT)%2==0:
 		source_GT = unhexlify(''.join([sGT[x:x+2][::-1] for x in range(0, len(sGT), 2) ]))
