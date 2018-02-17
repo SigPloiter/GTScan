@@ -24,11 +24,7 @@ parameters
 # Requirements
 python3
 
-pyfiglet==0.7.5
-
-termcolor==1.1.0
-
-colorama==0.3.9
+pip3 install -r requirements.txt
 
 And ofcourse an SS7/Sigtran access :)
 
