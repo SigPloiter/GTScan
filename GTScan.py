@@ -268,7 +268,20 @@ if __name__=='__main__':
 			8:'MSC',
 			9:'EIR',
 			10:'AuC',
-			149:'SGSN'}
+			142:'RANAP',
+			143:'RNSAP',
+			145:'GMLC',
+			146:'gsmSCF_CAP',
+			147:'gsmSCF_MAP',
+			148:'SIWF',
+			149:'SGSN',
+			150:'GGSN',
+			249:'PCAP',
+			250:'BCS',
+			251:'MCS_BSSAP-LE',
+			252:'SMLC',
+			253:'BSS_O&M',
+			254:'A_Interface'}
 	
 	if len(sGT)%2==0:
 		source_GT = unhexlify(''.join([sGT[x:x+2][::-1] for x in range(0, len(sGT), 2) ]))
