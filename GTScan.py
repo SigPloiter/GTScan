@@ -203,8 +203,7 @@ if __name__=='__main__':
 	print ("\033[33m[+]\033[0m	\t    Version 1			\033[33m[+]\033[0m")
 	print ("\033[33m[+]\033[0m\t      Author: LoayAbdelrazek		\033[33m[+]\033[0m")
 	print ("\033[33m[+]\033[0m	\t  (@SigPloiter)			\033[33m[+]\033[0m")
-	print ()
-	print ()
+	
 
 
 	parser = ArgumentParser()
