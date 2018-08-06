@@ -200,7 +200,7 @@ if __name__=='__main__':
 	banner = "GTScan"
 	cprint(figlet_format(banner, font="standard"),"blue")
 	print ("\033[33m[+]\033[0m	\tGlobalTitle Scanner		\033[33m[+]\033[0m")
-	print ("\033[33m[+]\033[0m	\t    Version 1			\033[33m[+]\033[0m")
+	print ("\033[33m[+]\033[0m	\t    Version 1.0			\033[33m[+]\033[0m")
 	print ("\033[33m[+]\033[0m\t      Author: LoayAbdelrazek		\033[33m[+]\033[0m")
 	print ("\033[33m[+]\033[0m	\t  (@SigPloiter)			\033[33m[+]\033[0m")
 	
@@ -248,7 +248,7 @@ if __name__=='__main__':
 	
 	
 	if (args.client_ip is False) or (args.client_port is False) or (args.sGT is False) or (args.dGT is False) or (args.client_pc is False) or (args.peer_pc is False):
-		print("not enought number of arguments\n\nExample: ./GTScan.py -G 201500000000,201500000002 -g 965123456780 -c 1 -C 2 -p 2905 -P 2906 -l 192.168.56.1 -r 192.168.56.102\n")
+		print("\nnot enought number of arguments\n\nExample: ./GTScan.py -G 201500000000,201500000002 -g 965123456780 -c 1 -C 2 -p 2905 -P 2906 -l 192.168.56.1 -r 192.168.56.102\n")
 		sys.exit(1)
 	
 	client_ip = args.client_ip
