@@ -32,4 +32,14 @@ And of course an SS7/Sigtran access :)
 
 Example: ./GTScan.py -G 201500000000,201500000002 -g 965123456780 -c 1 -C 2 -p 2905 -P 2906 -l 192.168.56.1 -r 192.168.56.102
 
+output sample:
+
+
+*** Detected GT ***
++--------------+-----------------+------+
+| Global Title | Subsytem Number | Node |
++--------------+-----------------+------+
+| 201179008244 |        6        | HLR  |
++--------------+-----------------+------+
+
 All contributions are mostly welcomed
